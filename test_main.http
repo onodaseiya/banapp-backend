@@ -1,0 +1,109 @@
+# Test your FastAPI endpoints
+GET http://127.0.0.1:8000/
+Accept: application/json
+
+###------------------------------ user ------------------------------
+
+GET http://127.0.0.1:8000/users/
+Accept: application/json
+
+###
+
+POST http://127.0.0.1:8000/users/
+Content-Type: application/json
+
+{
+  "name": "test-user2",
+  "cigarette_price": 500,
+  "cigarette_per_day": 10
+}
+
+###
+
+GET http://127.0.0.1:8000/users/4
+Accept: application/json
+
+
+###
+
+
+PATCH http://127.0.0.1:8000/users/4/coin
+Content-Type: application/json
+
+{
+  "coin": 1033
+}
+
+###------------------------------ pet ------------------------------
+
+
+POST http://127.0.0.1:8000/pets/
+Content-Type: application/json
+
+{
+  "user_id": 3,
+  "name": "test-pets"
+}
+
+###
+
+
+GET http://127.0.0.1:8000/pets
+Accept: application/json
+
+###
+
+
+GET http://127.0.0.1:8000/pets/1
+Accept: application/json
+
+###
+
+
+PATCH http://127.0.0.1:8000/pets/3/hunger
+Content-Type: application/json
+
+{
+  "hunger": 44
+}
+
+###
+
+GET http://127.0.0.1:8000/pets/3/death
+Accept: application/json
+
+
+###------------------------------ History ------------------------------
+GET http://127.0.0.1:8000/users/1/histories
+Accept: application/json
+
+
+
+###
+POST http://127.0.0.1:8000/histories/
+Content-Type: application/json
+
+{
+  "user_id": 1,
+  "pet_id": 1,
+  "more_money": 444444
+}
+
+
+###
+GET http://127.0.0.1:8000/achievements/
+Accept: application/json
+
+
+###
+POST http://127.0.0.1:8000/achievements/
+Content-Type: application/json
+
+{
+  "user_id": 1,
+  "achievement_id": 2
+}
+
+###
+GET http://127.0.0.1:8000/items/
+Accept: application/json
