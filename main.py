@@ -133,6 +133,14 @@ def change_coin(user_id: int, item_id: int):
             else: pass
 
         return {"message": "successful buy"}
+    
+#continuedayを持ってくる
+@app.get("/users/baitlogs/{user_id}")
+def get_continueday(user_id: int):
+    query = "SELECT * FROM banapp.baitlogs WHERE user_id = %s"
+    values = (user_id,)
+    return execute_query(query, values, fetch=True)
+
 # -------------------- Pet --------------------
 @app.post("/pets/", response_model=dict)
 def create_pet(pet_data: PetCreate):
