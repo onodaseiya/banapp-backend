@@ -141,6 +141,18 @@ def get_continueday(user_id: int):
     values = (user_id,)
     return execute_query(query, values, fetch=True)
 
+@app.get("/users/initialization/{user_id}")
+def initialization(user_id: int):
+    baitlogs_query = "UPDATE banapp.baitlogs SET continueday = 0, totalcount = 0 WHERE user_id = %s"
+    baitlogs_values = (user_id,)
+    execute_query(baitlogs_query, baitlogs_values, fetch=False)
+
+    achievements_query = "DELETE FROM banapp.get_achievements WHERE user_id = %s;"
+    achievements_values = (user_id,)
+    execute_query(achievements_query, achievements_values, fetch=False)
+
+    return {"message": "successful initialization"}
+
 # -------------------- Pet --------------------
 @app.post("/pets/", response_model=dict)
 def create_pet(pet_data: PetCreate):
@@ -221,22 +233,22 @@ def decision_achievement(user_id: int,):
 
         query = ""
 
-        if continueday is not None and continueday > 5:
+        if continueday is not None and continueday > 7:
             pass
 
-        elif continueday is not None and continueday >= 5:
+        elif continueday is not None and continueday >= 7:
                 #get_achievementにuser_id,achievement_idを送信
             query = "INSERT IGNORE INTO banapp.get_achievements (user_id, achievement_id) VALUES (%s, %s)"
             values = (row['user_id'], 4)
             
 
-        elif continueday is not None and continueday >= 3:
+        elif continueday is not None and continueday >= 5:
                 #get_achievementにuser_id,
             query = "INSERT IGNORE INTO banapp.get_achievements (user_id, achievement_id) VALUES (%s, %s)"
             values = (row['user_id'], 3)
             
                 
-        elif continueday is not None and continueday >= 1:
+        elif continueday is not None and continueday >= 3:
                 #get_achievementにuser_id,achievement_idを送信
             query = "INSERT IGNORE INTO banapp.get_achievements (user_id, achievement_id) VALUES (%s, %s)"
             values = (row['user_id'], 2)
